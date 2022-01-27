@@ -1,35 +1,39 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path')
+const webpack = require('webpack')
+
+const dev = process.env.NODE_ENV !== 'production'
 
 module.exports = {
-  entry: "./src/index.js",
-  mode: "development",
+  entry: './src/index.js',
+  mode: 'development',
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "babel-loader",
-        options: { presets: ["@babel/env"] },
+        loader: 'babel-loader',
+        options: { presets: ['@babel/env'] },
       },
       {
         test: /\.(css)$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ['*', '.js', '.jsx'] },
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist/'),
+    publicPath: '/dist/',
+    filename: 'bundle.js',
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, "public/"),
+      directory: path.join(__dirname, 'public/'),
     },
     port: 3000,
-    hot: "only",
+    hot: 'only',
+    allowedHosts: 'all',
   },
+  devtool: dev ? 'eval-cheap-module-source-map' : 'source-map',
   plugins: [new webpack.HotModuleReplacementPlugin()],
-};
+}
