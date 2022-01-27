@@ -8,9 +8,15 @@ import {
   markTodoThunk,
   removeTodoThunk,
 } from '../../store/actions/todosThunks'
+import {
+  getCompleteTodosFromState,
+  getInCompleteTodosFromState,
+  getLaodingFromState,
+} from '../../store/selectors'
 
 const TodoList = ({
-  todos = [],
+  completedTodos,
+  incompleteTodos,
   deleteTodo,
   markComplete,
   loading,
@@ -24,7 +30,17 @@ const TodoList = ({
   const content = (
     <div className='list-wrapper'>
       <NewTodoForm />
-      {todos.map((todo) => (
+      <h3 style={{ marginTop: 64 }}>Incomplete</h3>
+      {incompleteTodos.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          deleteTodo={deleteTodo}
+          markComplete={markComplete}
+        />
+      ))}
+      <h3 style={{ marginTop: 64 }}>Completed</h3>
+      {completedTodos.map((todo) => (
         <TodoListItem
           key={todo.id}
           todo={todo}
@@ -42,8 +58,9 @@ const TodoList = ({
 }
 
 const mapStateToProps = (state) => ({
-  todos: state.todos,
-  loading: state.loading,
+  completedTodos: getCompleteTodosFromState(state),
+  incompleteTodos: getInCompleteTodosFromState(state),
+  loading: getLaodingFromState(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
