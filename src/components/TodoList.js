@@ -1,18 +1,18 @@
 import React from 'react'
-import './TodoList.css'
 import { connect } from 'react-redux'
-import NewTodoForm from '../NewTodoForm/NewTodoForm'
-import TodoListItem from '../TodoListItem/TodoListItem'
+import NewTodoForm from './NewTodoForm'
+import TodoListItem from './TodoListItem'
+import styled from 'styled-components'
 import {
   loadTodosThunk,
   markTodoThunk,
   removeTodoThunk,
-} from '../../store/actions/todosThunks'
+} from '../store/actions/todosThunks'
 import {
   getCompleteTodosFromState,
   getInCompleteTodosFromState,
   getLaodingFromState,
-} from '../../store/selectors'
+} from '../store/selectors'
 
 const TodoList = ({
   completedTodos,
@@ -28,7 +28,7 @@ const TodoList = ({
 
   const loadingMessage = <p style={{ textAlign: 'center' }}>Loading Todos...</p>
   const content = (
-    <div className='list-wrapper'>
+    <ListWrapper>
       <NewTodoForm />
       <h3 style={{ marginTop: 64 }}>Incomplete</h3>
       {incompleteTodos.map((todo) => (
@@ -48,7 +48,7 @@ const TodoList = ({
           markComplete={markComplete}
         />
       ))}
-    </div>
+    </ListWrapper>
   )
 
   if (loading) {
@@ -56,6 +56,11 @@ const TodoList = ({
   }
   return content
 }
+
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`
 
 const mapStateToProps = (state) => ({
   completedTodos: getCompleteTodosFromState(state),
