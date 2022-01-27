@@ -1,9 +1,13 @@
 import React from 'react'
 import './TodoList.css'
-import TodoListItem from './TodoListItem'
-import NewTodoForm from './NewTodoForm'
 import { connect } from 'react-redux'
-import { loadTodosThunk, markTodoThunk, removeTodoThunk } from './todosThunks'
+import NewTodoForm from '../NewTodoForm/NewTodoForm'
+import TodoListItem from '../TodoListItem/TodoListItem'
+import {
+  loadTodosThunk,
+  markTodoThunk,
+  removeTodoThunk,
+} from '../../store/actions/todosThunks'
 
 const TodoList = ({
   todos = [],

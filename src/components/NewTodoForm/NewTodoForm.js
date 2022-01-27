@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createTodo } from '../store/actions/todos'
-import { generateId } from '../util'
 import './NewTodoForm.css'
-import { addTodoThunk } from './todosThunks'
+import { addTodoThunk } from '../../store/actions/todosThunks'
 
 function NewTodoForm({ addNewTodo }) {
   const [inputValue, setInputValue] = React.useState('')

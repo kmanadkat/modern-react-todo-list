@@ -5,7 +5,7 @@ import {
   loadTodosSuccess,
   markCompleteTodo,
   removeTodo,
-} from '../store/actions/todos'
+} from './todos'
 
 const loadTodosThunk = () => async (dispatch, getState) => {
   dispatch(loadTodos())
