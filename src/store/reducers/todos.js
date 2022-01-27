@@ -1,5 +1,6 @@
 import {
   CREATE_TODO,
+  LOADING_TODOS_SUCCESS,
   MARK_COMPLETE_TODO,
   REMOVE_TODO,
 } from '../actions/constants'
@@ -8,6 +9,9 @@ const intialState = []
 
 export const todosReducer = (state = intialState, { type, payload }) => {
   switch (type) {
+    case LOADING_TODOS_SUCCESS:
+      return [...payload.todos]
+
     case CREATE_TODO:
       return [...state, payload]
 

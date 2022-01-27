@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { createTodo } from '../store/actions/todos'
 import { generateId } from '../util'
 import './NewTodoForm.css'
+import { addTodoThunk } from './todosThunks'
 
-function NewTodoForm({ todos, addTodo }) {
+function NewTodoForm({ addNewTodo }) {
   const [inputValue, setInputValue] = React.useState('')
 
   const createButtonHandler = (e) => {
-    addTodo(inputValue)
+    addNewTodo({ text: inputValue, isCompleted: false })
     setInputValue('')
   }
 
@@ -28,12 +29,8 @@ function NewTodoForm({ todos, addTodo }) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  todos: state.todos,
-})
-
 const mapDispatchToProps = (dispatch) => ({
-  addTodo: (text) => dispatch(createTodo({ text, id: generateId() })),
+  addNewTodo: (todo) => dispatch(addTodoThunk(todo)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTodoForm)
+export default connect(null, mapDispatchToProps)(NewTodoForm)
